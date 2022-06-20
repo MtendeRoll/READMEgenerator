@@ -59,7 +59,17 @@ function renderLicenseSection(license) {
 - ${renderLicenseLink(license)}`;
 }
 
-// TODO: Create a function to generate markdown for README
+// A function that returns links to the links section of the README
+function renderLinks(links) {
+  if (links === " ") {
+    return " ";
+  } else {
+    return `- [Page Link](${links})
+    `;
+  }
+}
+
+// A function to generate markdown for README
 function generateMarkdown(data) {
   return `# ${data.title}
   ${renderLicenseBadge(data.license)}
@@ -72,7 +82,7 @@ function generateMarkdown(data) {
   * [Usage](#usage)
   * [Credits](#credits)
   * [License](#license)
-  * [Contributing](#contributing)
+  * [Contributing](#contribution)
   * [Tests](#tests)
   * [Questions](#questions)
 
@@ -82,10 +92,14 @@ function generateMarkdown(data) {
   ## Usage
   ${data.usage}
 
+  ## Additional Links
+  ${renderLinks(data.links)}
+
   ## License
+  The Badge at the top of the page shows which license this project is under. Please click the link below for additional information about the license
   ${renderLicenseSection(data.license)}
 
-  ## Contributing
+  ## Contribution
   ${data.contribution}
 
   ## Tests
@@ -93,8 +107,11 @@ function generateMarkdown(data) {
 
   ## Questions
   Please contact me with any questions you have regarding my project.
-  Names: ${data.credits}
+
+  Github Name: ${data.credits}
+
   Email: ${data.email}
+
   Github: ${data.github}
 `;
 }

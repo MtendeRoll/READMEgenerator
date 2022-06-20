@@ -34,6 +34,7 @@ const questions = [
   },
   { type: "input", name: "contribution", message: "Please enter information for how other developers can contribute." },
   { type: "input", name: "tests", message: "Please provide examples of how to run your project tests." },
+  { type: "input", name: "links", message: "Please provide url links for any additional information" },
   { type: "input", name: "email", message: "Please enter your email address." },
   { type: "input", name: "repo", message: "Please enter the name of your github repository for this project." },
 ];
