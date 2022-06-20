@@ -1,7 +1,7 @@
 //Packages needed for this application
 const inquirer = require("inquirer");
 const fs = require("fs");
-const generateMarkdown = require("./utils/generateMarkdown");
+const generateMarkdown = require("./utils/generateMarkdown.js");
 
 // An array of questions for user input
 const questions = [
@@ -25,13 +25,14 @@ const questions = [
     message: "Which license are you using for your project?",
     choices: [
       { name: "MIT", value: "MIT" },
+      { name: "BOOST 1.0", value: "BOOST" },
       { name: "ISC", value: "ISC" },
       { name: "APACHE 2.0", value: "APACHE" },
       { name: "BSD", value: "BSD" },
       { name: "GPL 3.0", value: "GPL" },
     ],
   },
-  { type: "input", name: "contributing", message: "Please enter information for how other developers can contribute." },
+  { type: "input", name: "contribution", message: "Please enter information for how other developers can contribute." },
   { type: "input", name: "tests", message: "Please provide examples of how to run your project tests." },
   { type: "input", name: "email", message: "Please enter your email address." },
   { type: "input", name: "repo", message: "Please enter the name of your github repository for this project." },
@@ -39,8 +40,17 @@ const questions = [
 
 // A function to write README file
 function writeToFile(fileName, data) {
-  fs.writeFile("./" + fileName, data, "utf8", (err) => {
-    if (err) throw new Error(err);
+  return new Promise((resolve, reject) => {
+    fs.writeFile("./" + fileName, data, (err) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve({
+        ok: true,
+        message: "File created!",
+      });
+    });
   });
 }
 
@@ -48,7 +58,7 @@ function writeToFile(fileName, data) {
 function init() {
   inquirer.prompt(questions).then((answers) => {
     console.log(answers);
-    writeToFile("./generatedREADME/README.md", generateMarkdown(answers));
+    writeToFile("README.md", generateMarkdown(answers));
   });
 }
 
