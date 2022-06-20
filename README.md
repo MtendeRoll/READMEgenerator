@@ -51,14 +51,6 @@ MIT
 
 - [License: MIT](https://opensource.org/licenses/MIT)
 
-## Contribution
-
-Debugging
-
-## Tests
-
-Example test
-
 ## Questions
 
 Please contact me with any questions you have regarding my project.
