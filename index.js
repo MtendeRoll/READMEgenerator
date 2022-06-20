@@ -37,15 +37,20 @@ const questions = [
   { type: "input", name: "repo", message: "Please enter the name of your github repository for this project." },
 ];
 
-// TODO: Create a function to write README file
+// A function to write README file
 function writeToFile(fileName, data) {
   fs.writeFile("./" + fileName, data, "utf8", (err) => {
     if (err) throw new Error(err);
   });
 }
 
-// TODO: Create a function to initialize app
-function init() {}
+// A function to initialize app
+function init() {
+  inquirer.prompt(questions).then((answers) => {
+    console.log(answers);
+    writeToFile("./generatedREADME/README.md", generateMarkdown(answers));
+  });
+}
 
 // Function call to initialize app
 init();
